@@ -1,0 +1,43 @@
+{
+    "name": "Gamers' Plane",
+    "version": "0.9",
+    "icons": {
+        "16": "icon_16.png",
+        "32": "icon_32.png",
+        "64": "icon_48.png",
+        "128": "icon_128.png"
+      },
+    "description": "Options for changing the Gamers' Plane experience.",
+    "permissions": ["storage"],
+      "web_accessible_resources": ["options.html"],
+    "content_scripts": [
+        {
+          "matches": ["https://gamersplane.com/"],
+          "css": ["gp-home.css"],
+          "js": ["jquery-3.5.1.min.js","gp-home.js"],
+          "run_at": "document_idle"
+        },
+        {
+            "matches": ["https://gamersplane.com/forums/thread/*"],
+            "css": ["gp-thread.css"],
+            "js": ["jquery-3.5.1.min.js","gp-thread.js"],
+            "run_at": "document_idle"
+          },
+          {
+              "matches": ["https://gamersplane.com/forums/thread/*","https://gamersplane.com/forums/post/*","https://gamersplane.com/forums/newThread/*"],
+              "css": ["gp-post.css"],
+              "js": ["jquery-3.5.1.min.js","gp-post.js"],
+              "run_at": "document_idle"
+            },
+            {
+                "matches": ["https://gamersplane.com/forums/thread/*"],
+                "css": ["gp-search.css"],
+                "js": ["jquery-3.5.1.min.js","gp-search.js"],
+                "run_at": "document_idle"
+              }             ],
+      "options_ui": {
+        "page": "options.html",
+        "open_in_tab": false
+      },
+    "manifest_version": 2
+  }
