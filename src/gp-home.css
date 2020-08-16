@@ -1,0 +1,9 @@
+#page_home div#announcements
+{
+    float: none;
+    width: auto;
+}
+.sideWidget
+{
+    display:none;
+}

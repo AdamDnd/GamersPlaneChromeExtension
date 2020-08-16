@@ -1,0 +1,18 @@
+.userOnline
+{
+    position:relative;
+}
+
+.userOnline:after
+{
+    position: absolute;
+    top:0px;
+    right:0px;
+    content:' ';
+    display:block;
+    background-color: #6BB928;
+    width:10px;
+    height:10px;
+    border:none;
+    border-bottom:solid 1px #4F8A1C;
+}

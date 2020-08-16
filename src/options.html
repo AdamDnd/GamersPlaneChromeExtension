@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head><title>Gamers' Plane Extension Options</title></head>
+<link href="https://gamersplane.com/styles/reset.css?v=1.0.0" rel="stylesheet">
+<link href="https://gamersplane.com/styles/gamersPlane.css?v=1.11.4" rel="stylesheet">
+<link href="options.css" rel="stylesheet">
+<body>
+
+    <header id="bodyHeader" ng-controller="header" class="ng-scope" style="height: 70px;">
+        <div id="headerBG" style="height: 70px;"></div>
+        <div class="bodyContainer" style="height: 70px;">
+            <a id="headerLogo" href="/"><img src="https://gamersplane.com/images/bodyComponents/logo.png" alt="Gamers Plane Logo" style="height: 53px;"></a>
+        </div>
+    </header>
+    <div id="content">
+        <div class="bodyContainer clearfix">
+
+    <h1>Snippets</h1>
+<div id="snippet_templ" style="display:none">
+    <div class="snippet">
+    <input type="text" placeholder="Snippet name"><br/>
+    <textarea placeholder="Snippet"></textarea>
+    </div>
+</div>
+
+<div id="snippets">
+
+</div>
+
+
+<div id="status"></div>
+
+<button id="save" class="fancyButton" style="transform: skew(-30deg); margin-left: 9px; margin-right: 9px;"><div class="skewedDiv" style="transform: skew(30deg); margin-left: 9px; margin-right: 9px;">Save Snippets</div></button>
+
+
+<script src="jquery-3.5.1.min.js"></script>
+<script src="options.js"></script>
+
+</div>
+</div>
+</body>
+</html>
