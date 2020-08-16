@@ -1,4 +1,5 @@
 var snippetMenu=$('<li class="markItUpButton markItUpButtonSnippet markItUpDropMenu"><span>Snippet</span><ul></ul></li>').appendTo('.markItUpHeader>ul');
+snippetMenu.on('mouseenter',function(){$('ul',this).show();});
 
 chrome.storage.sync.get({
     snippets: []
