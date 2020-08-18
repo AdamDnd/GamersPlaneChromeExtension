@@ -26,3 +26,9 @@ Shows which of your party are act in a thread by putting an indicator next to th
 2. In Chrome, open the Extension Management page by navigating to chrome://extensions
 3. Enable Developer Mode by clicking the toggle switch next to Developer mode
 4. Click the LOAD UNPACKED button and select the extension directory
+
+## Update
+1. Download the src folder again
+2. Replace the src on your computer with the new one.
+3. In Chrome, open the Extension Management page by navigating to chrome://extensions
+4. Find the Gamers' Plane extention and click the round refresh arrow
