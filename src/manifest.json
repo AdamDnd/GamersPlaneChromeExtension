@@ -31,10 +31,17 @@
             },
             {
                 "matches": ["https://gamersplane.com/forums/thread/*"],
-                "css": ["gp-search.css"],
-                "js": ["jquery-3.5.1.min.js","gp-search.js"],
+                "css": ["gp-search.css","gp-youtube-expand.css"],
+                "js": ["jquery-3.5.1.min.js","gp-search.js","gp-youtube-expand.js"],
                 "run_at": "document_idle"
-              }             ],
+              },
+              {
+                "matches": ["https://gamersplane.com/forums/*"],
+                "css": ["gp-post.css"],
+                "js": [],
+                "run_at": "document_idle"
+              }             
+            ],
       "options_ui": {
         "page": "options.html",
         "open_in_tab": false
