@@ -1,18 +1,16 @@
 window.addEventListener("DOMContentLoaded", function() {
 
-    var isNightMode=false;
+    var isDarkMode=false;
     chrome.storage.sync.get({darkmode:false},function(result) {
-        console.log(result.darkmode);
-        var isNightMode=result.darkmode;
-        if(isNightMode){
+        var isDarkMode=result.darkmode;
+        if(isDarkMode){
             toggleDarkMode();
         }
       });
 
 
     $(document).keydown(function(e) {
-        if(e.altKey && e.keyCode == 78)
-        {
+        if(e.altKey && e.keyCode == 78){
             toggleDarkMode();
         }
   });    
@@ -20,9 +18,8 @@ window.addEventListener("DOMContentLoaded", function() {
 
   var invertedColors=false;
   var toggleDarkMode=function(){
-
         $('body').toggleClass('dark');
-        isNightMode=!isNightMode;
+        isDarkMode=!isDarkMode;
   
         if(!invertedColors){
             $('.post span').filter(function() {
@@ -36,9 +33,7 @@ window.addEventListener("DOMContentLoaded", function() {
             invertedColors=true;
         }
 
-        console.log(isNightMode);
-        chrome.storage.sync.set({darkmode: isNightMode}, function() {
-          });        
+        chrome.storage.sync.set({darkmode: isDarkMode}, function() { });        
   };
 
 });
