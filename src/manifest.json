@@ -18,6 +18,12 @@
           "run_at": "document_idle"
         },
         {
+          "matches": ["https://gamersplane.com/*"],
+          "css": ["gp-all-pages.css"],
+          "js": ["jquery-3.5.1.min.js","gp-all-pages.js"],
+          "run_at": "document_start"
+        },
+        {
             "matches": ["https://gamersplane.com/forums/thread/*"],
             "css": ["gp-thread.css"],
             "js": ["jquery-3.5.1.min.js","gp-thread.js"],

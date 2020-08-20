@@ -1,0 +1,136 @@
+body.dark #content
+{
+    background-color: #303136;
+}
+
+body.dark
+{
+    color:#ddd;
+}
+
+body.dark .fauxLink, 
+body.dark a,
+body.dark  a:active,
+body.dark  a:visited,
+body.dark  button.normal,
+body.dark  button.normal:active,
+body.dark  button.normal:visited
+{
+    color:#c54;
+}
+
+
+
+body.dark  a.username,
+body.dark   a.username:active,
+body.dark   a.username:visited
+{
+    color:#89c;
+}
+
+body.dark #page_home #announcements 
+{
+    background-color: #37393F;   
+}
+
+body.dark .headerbar a, body.dark .headerbar a:active, body.dark .headerbar a:hover, body.dark .headerbar a:visited, body.dark div.headerbar
+{
+    color:#ddd;
+}
+
+
+body.dark #page_forum_thread .postContent
+{
+background-color: #37393F;
+}
+
+body.dark #page_forum_thread .postPoint 
+{
+    background-image: none;
+    border:solid 20px transparent;
+    border-right-color: #444;
+    width:0;
+    height:0;
+    left:-40px;
+    top:10px;
+}
+
+body.dark #page_forum_thread .postPoint:after
+{
+    display: block;
+    content:' ';
+    position: absolute;
+    border:solid 18px transparent;
+    border-right-color: #37393F;
+    width:0;
+    height:0;
+    left: -14px;
+    top: -18px;    
+}
+
+body.dark #page_forum_thread .postHeader
+{
+    border-bottom-color: #c54;
+}
+
+body.dark .note,
+body.dark  .quote,
+body.dark  .spoiler
+{
+    background-color: #303136;   
+}
+
+body.dark .oocText
+{
+    color:#89c;
+}
+
+body.dark #page_forum .sudoTable .tr:hover, 
+body.dark #page_forum_search .sudoTable .tr:hover {
+    background-color: #37393F;
+}
+
+body.dark #page_gameDetails .characters 
+{
+    background-color: #37393F;
+
+}
+
+body.dark .hbAttachedList>li:hover
+{
+    background-color: #37393F;   
+   
+}
+
+body.dark #page_gameDetails #playersInGame>li:hover .characters
+{
+    background-color: #303136;   
+   
+}
+
+body.dark .markItUpButton,
+body.dark .markItUpHeader ul .markItUpDropMenu,
+body.dark .markItUpHeader ul .markItUpSeparator
+{
+    background-color: #ddd;
+    min-height:22px;
+}
+
+body.dark .markItUpHeader ul .markItUpSeparator
+{
+    margin:0;
+    border:solid 10px #ddd;
+    background-color: #303136;
+    border-top-width: 0;
+    border-bottom-width: 0;
+}
+
+
+body.dark #messageTextArea
+{
+    border-top-left-radius: 0;
+}
+
+body.dark span.invertColors {
+    mix-blend-mode: screen;
+}
