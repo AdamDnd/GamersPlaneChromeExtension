@@ -17,7 +17,6 @@ $('#snippets').on('keyup', 'input', function () { addCan(); });
 $('#snippets').on('blur', 'input', function () { addCan(); });
 
 
-// Saves options to chrome.storage
 function save_options() {
 
     var snippets=[];
@@ -31,13 +30,9 @@ function save_options() {
         }
     });
 
-    console.log(snippets);
-    console.log(snippets.length);
-
-    chrome.storage.sync.set({
+    settingStorage.set({
       snippets: snippets
     }, function() {
-      // Update status to let user know options were saved.
       var status = document.getElementById('status');
       status.textContent = 'Options saved.';
       setTimeout(function() {
@@ -46,10 +41,8 @@ function save_options() {
     });
   }
   
-  // Restores select box and checkbox state using the preferences
-  // stored in chrome.storage.
   function restore_options() {
-    chrome.storage.sync.get({
+    settingStorage.get({
       snippets: []
     }, function(items) {
         for(var i=0;i<items.snippets.length;i++)

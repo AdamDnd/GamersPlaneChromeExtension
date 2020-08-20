@@ -20,7 +20,7 @@
         {
           "matches": ["https://gamersplane.com/*"],
           "css": ["gp-all-pages.css"],
-          "js": ["jquery-3.5.1.min.js","gp-all-pages.js"],
+          "js": ["jquery-3.5.1.min.js","setting-storage.js","gp-all-pages.js"],
           "run_at": "document_start"
         },
         {
@@ -32,7 +32,7 @@
           {
               "matches": ["https://gamersplane.com/forums/thread/*","https://gamersplane.com/forums/post/*","https://gamersplane.com/forums/newThread/*"],
               "css": ["gp-post.css"],
-              "js": ["jquery-3.5.1.min.js","gp-post.js"],
+              "js": ["jquery-3.5.1.min.js","setting-storage.js","gp-post.js"],
               "run_at": "document_idle"
             },
             {

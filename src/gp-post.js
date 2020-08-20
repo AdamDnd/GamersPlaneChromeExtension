@@ -1,7 +1,7 @@
 var snippetMenu=$('<li class="markItUpButton markItUpButtonSnippet markItUpDropMenu"><span>Snippet</span><ul></ul></li>').appendTo('.markItUpHeader>ul');
 snippetMenu.on('mouseenter',function(){$('ul',this).show();});
 
-chrome.storage.sync.get({
+settingStorage.get({
     snippets: []
   }, function(items) {
       var subMenu=$('ul',snippetMenu);
@@ -9,7 +9,7 @@ chrome.storage.sync.get({
       {  
           var li=$('<li class="markItUpAddSnippet"><a></a></li>').appendTo(subMenu);
           $('a',li).text(items.snippets[i].name);
-          li.data('snippet',items.snippets[i].val);
+          li.attr('snippet',items.snippets[i].val);
 
       }
       $('<li class="markItUpManageSnippets"><a>Manage...</a></li>').appendTo(subMenu);
@@ -22,11 +22,24 @@ $('.markItUpHeader').on('click','.markItUpManageSnippets',function(){
 
 $('.markItUpHeader').on('click','.markItUpAddSnippet',function(){
     var chosenSnippet=$(this);
-    var snippetVal=chosenSnippet.data('snippet');
+    var snippetVal=chosenSnippet.attr('snippet');
     var txtArea=$('textarea',chosenSnippet.closest('.markItUpContainer'));
 
-    txtArea.focus();
-    document.execCommand('insertText', false , snippetVal);
+    if(/chrome/.test(navigator.userAgent.toLowerCase()))
+    {
+        txtArea.focus();
+        document.execCommand('insertText', false , snippetVal);
+    }
+    else
+    {
+        var txtEle=txtArea.get(0);
+        txtEle.setRangeText(
+            snippetVal,
+            txtEle.selectionStart || 0,
+            txtEle.selectionEnd || 0,
+            'end'
+        );        
+    }
 
 });
 

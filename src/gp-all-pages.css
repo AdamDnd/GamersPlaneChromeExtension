@@ -134,3 +134,18 @@ body.dark #messageTextArea
 body.dark span.invertColors {
     mix-blend-mode: screen;
 }
+
+body.dark #page_forum_thread div.postBlockFound
+{
+    background-color: transparent;
+}
+
+body.dark #page_forum_thread div.postBlockFound .postContent 
+{
+    border-color: #c54;
+}
+
+body.dark #page_forum_thread div.postBlockFound .postPoint
+{
+    border-right-color: #c54;   
+}

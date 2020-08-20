@@ -15,7 +15,6 @@ var checkOnline=function(pageNum){
 
         checkOnline(pageNum+1);
       }, "json");    
-    
-}
+};
 
 checkOnline(1);

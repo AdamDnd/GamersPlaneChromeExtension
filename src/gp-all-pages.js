@@ -1,7 +1,7 @@
 window.addEventListener("DOMContentLoaded", function() {
 
     var isDarkMode=false;
-    chrome.storage.sync.get({darkmode:false},function(result) {
+    settingStorage.get({darkmode:false},function(result) {
         var isDarkMode=result.darkmode;
         if(isDarkMode){
             toggleDarkMode();
@@ -33,7 +33,7 @@ window.addEventListener("DOMContentLoaded", function() {
             invertedColors=true;
         }
 
-        chrome.storage.sync.set({darkmode: isDarkMode}, function() { });        
+        settingStorage.set({darkmode: isDarkMode}, function() { });        
   };
 
 });
