@@ -98,10 +98,10 @@ if(/chrome/.test(navigator.userAgent.toLowerCase()))
                     var label=$('.skill_name',skill).text();
                     var bonus=$('.skill_stat',skill).text();
                     //extract the number from +1 (wis)
-                    bonus=bonus.match(/[^\d\-\+]*([\-\+]\d)[^\d\-\+]*/)[1];
+                    bonus=bonus.match(/[^\d\-\+]*([\-\+]\d+)[^\d\-\+]*/)[1];
     
                     //if the number is hiding in the skill name (e.g. Medicine + 8) then use that
-                    var labelBonus=label.match(/[^\d\-\+]*([\-\+]\d)[^\d\-\+]*/);
+                    var labelBonus=label.match(/[^\d\-\+]*([\-\+]\d+)[^\d\-\+]*/);
                     if(labelBonus)
                     {
                         bonus=labelBonus[1];

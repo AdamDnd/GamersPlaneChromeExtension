@@ -192,3 +192,8 @@ body.dark .rollForChar.sel
     background-color: #37393F;   
     color:#ddd;
 }
+
+body.dark #topNotifications
+{
+    color:#05e;
+}
