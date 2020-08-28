@@ -56,3 +56,33 @@
 {
     text-decoration: none;
 }
+
+input[type=file].imageFileUpload
+{
+color:transparent;
+background: transparent;
+    border: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: 0;
+  
+}
+
+input[type=file].imageFileUpload::before {
+    content: 'Imgur';
+    display: inline-block;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    color:#01B96B;
+    font-size: 80%;
+    font-weight: bold;
+    background: transparent url(https://gamersplane.com/javascript/markItUp/sets/bbcode/images/picture.png) no-repeat center left;
+    padding-left:20px;
+  }
+  
+  input[type=file].imageFileUpload::-webkit-file-upload-button {
+    visibility: hidden;
+  }

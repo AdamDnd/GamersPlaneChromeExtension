@@ -1,4 +1,40 @@
 var snippetMenu=$('<li class="markItUpButton markItUpButtonSnippet markItUpDropMenu"><span>Snippet</span><ul></ul></li>').appendTo('.markItUpHeader>ul');
+var uploadButton=$('<li class="markItUpButton"><input type="file" class="imageFileUpload"></li>').appendTo('.markItUpHeader>ul');
+
+$('.imageFileUpload',uploadButton).on('change', function () {
+
+    var pThis=$(this);
+
+    var files = pThis.get(0).files;
+
+      var imgurApi = 'https://api.imgur.com/3/image';
+      var apiKey = '7de684608de179a';
+
+      var settings = {
+        url: imgurApi,
+        type: 'POST',
+        async: false, crossDomain: true, processData: false, contentType: false,
+        headers: {
+          Authorization: 'Client-ID ' + apiKey,
+          Accept: 'application/json',
+        },
+        mimeType: 'multipart/form-data',
+      };
+
+      var formData = new FormData();
+      formData.append('image', files[0]);
+      settings.data = formData;
+
+      $.ajax(settings).done(function (response) {
+        var responseObj = JSON.parse(response);
+        insertText(pThis,'[img]'+responseObj.data.link+'[/img]');
+      }).fail(function(errorReason){
+            var responseObj=JSON.parse(errorReason.responseText);
+            alert(responseObj.data.error.message);
+
+      });
+  });
+
 snippetMenu.on('mouseenter',function(){$('ul',this).show();});
 
 settingStorage.get({
@@ -20,27 +56,32 @@ $('.markItUpHeader').on('click','.markItUpManageSnippets',function(){
     window.open(chrome.extension.getURL("options.html"));
 });
 
-$('.markItUpHeader').on('click','.markItUpAddSnippet',function(){
-    var chosenSnippet=$(this);
-    var snippetVal=chosenSnippet.attr('snippet');
-    var txtArea=$('textarea',chosenSnippet.closest('.markItUpContainer'));
+var insertText=function(button,text)
+{
+    var txtArea=$('textarea',button.closest('.markItUpContainer'));
 
     if(/chrome/.test(navigator.userAgent.toLowerCase()))
     {
         txtArea.focus();
-        document.execCommand('insertText', false , snippetVal);
+        document.execCommand('insertText', false , text);
     }
     else
     {
         var txtEle=txtArea.get(0);
         txtEle.setRangeText(
-            snippetVal,
+            text,
             txtEle.selectionStart || 0,
             txtEle.selectionEnd || 0,
             'end'
         );        
     }
 
+};
+
+$('.markItUpHeader').on('click','.markItUpAddSnippet',function(){
+    var chosenSnippet=$(this);
+    var snippetVal=chosenSnippet.attr('snippet');
+    insertText(chosenSnippet,snippetVal);
 });
 
 //forums menu

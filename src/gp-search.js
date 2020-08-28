@@ -53,6 +53,8 @@ searchButton.on('click',function(){
                     {
                         addedBlock.addClass('lastPostBlockFound');
                     }
+
+                    $('.spoiler>.tag',addedBlock).on('click',function(){$(this).closest('.spoiler').toggleClass('closed');});
                 }
             }
             var title=$('<div class="postBlock postRight postAsChar withCharAvatar clearfix postBlockFound"><h1></h1></div>').insertAfter(threadMenu);

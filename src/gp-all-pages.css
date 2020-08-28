@@ -197,3 +197,15 @@ body.dark #topNotifications
 {
     color:#05e;
 }
+
+body.dark #page_user .gameInfo
+{
+    color: #303136;      
+}
+
+body.dark input[type=file].imageFileUpload
+{
+    background-color: transparent;   
+    color:transparent;
+    border-color: transparent;
+}

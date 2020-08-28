@@ -1,15 +1,15 @@
-if(/chrome/.test(navigator.userAgent.toLowerCase()))
-{
-    var gameDetails=$('#fixedMenu_window .rightCol a.menuLink').attr('href').split('/');
-    var gameId=gameDetails[2];
+var gameDetails=$('#fixedMenu_window .rightCol a.menuLink');
+
+if(gameDetails.length>0){
+    var gameDetailsHref=gameDetails.attr('href').split('/');
+    var gameId=gameDetailsHref[2];
     var curUserId=0;
     var isGm=false;
 
     $.ajax({
         type: "POST",
         url: "https://api.gamersplane.com/users/getCurrentUser/",
-        success: function(data)
-        {
+        success: function(data){
             curUserId=data.userID;
             $.ajax({
                 type: "POST",
@@ -55,7 +55,7 @@ if(/chrome/.test(navigator.userAgent.toLowerCase()))
 
                 {
                     var roller=$('<div class="roller rollerInit"><span></span><ul class="rollSel"><li><small></small></li><li class="adv">A</li><li class="dis">D</li></ul></roller>').appendTo(charSheet);
-                    var initiative=$('div',$('#stats .tr label:contains(Initiative)',charSheetContent).closest('.tr')).text();
+                    var initiative=$.trim($('div',$('#stats .tr label:contains(Initiative)',charSheetContent).closest('.tr')).text());
                     if(initiative>=0){
                         initiative=('+'+initiative);
                     }
@@ -68,9 +68,9 @@ if(/chrome/.test(navigator.userAgent.toLowerCase()))
                 $('<h3>Abilities</h3>').appendTo(charSheet);
                 $('.abilityScore',charSheetContent).each(function(){
                     var abilityScore=$(this);
-                    var label=$('.shortText',abilityScore).text();
-                    var check=$('.stat_mod',abilityScore).text();
-                    var save=$('.saveProficient',abilityScore).text();
+                    var label=$.trim($('.shortText',abilityScore).text());
+                    var check=$.trim($('.stat_mod',abilityScore).text());
+                    var save=$.trim($('.saveProficient',abilityScore).text());
                     var roller=$('<div class="roller"><span></span><ul class="check rollSel"><li>Check <small></small></li><li class="adv">A</li><li class="dis">D</li></ul><ul class="save rollSel"><li>Save <small></small></li><li class="adv">A</li><li class="dis">D</li></ul></roller>').appendTo(charSheet);
                     $('span',roller).text(label);
                     $('ul.check',roller).attr('d20',check);
@@ -82,21 +82,22 @@ if(/chrome/.test(navigator.userAgent.toLowerCase()))
                 $('<h3>Weapons</h3>').appendTo(charSheet);
                 $('.weapon',charSheetContent).each(function(){
                     var weapon=$(this);
-                    var label=$('.weapon_name',weapon).text();
-                    var toHit=$('.weapons_ab',weapon).text();
-                    var dmg=$('.weapon_damage',weapon).text();
-                    var roller=$('<div class="roller"><span></span><ul class="rollSel"><li>Attack <small></small></li><li class="adv">A</li><li class="dis">D</li></ul></roller>').appendTo(charSheet);
+                    var label=$.trim($('.weapon_name',weapon).text());
+                    var toHit=$.trim($('.weapons_ab',weapon).text());
+                    var dmg=$.trim($('.weapon_damage',weapon).text());
+                    var roller=$('<div class="roller"><span></span><ul class="rollSel attack"><li>To hit: <small></small></li><li class="adv">A</li><li class="dis">D</li></ul></roller> <ul class="rollSel dmg"><li>Dmg: <small></small></li></ul>').appendTo(charSheet);
                     $('span',roller).text(label);
-                    $('ul',roller).attr('d20',toHit);
-                    $('ul',roller).attr('dmg',dmg);
-                    $('ul small',roller).text(toHit+' / '+dmg);
+                    $('ul.attack',roller).attr('d20',toHit);
+                    $('ul.dmg',roller).attr('dmg',dmg);
+                    $('ul.attack small',roller).text(toHit);
+                    $('ul.dmg small',roller).text(dmg);
                 });
     
                 $('<h3>Skills</h3>').appendTo(charSheet);
                 $('.skill',charSheetContent).each(function(){
                     var skill=$(this);
-                    var label=$('.skill_name',skill).text();
-                    var bonus=$('.skill_stat',skill).text();
+                    var label=$.trim($('.skill_name',skill).text());
+                    var bonus=$.trim($('.skill_stat',skill).text());
                     //extract the number from +1 (wis)
                     bonus=bonus.match(/[^\d\-\+]*([\-\+]\d+)[^\d\-\+]*/)[1];
     
@@ -141,12 +142,18 @@ if(/chrome/.test(navigator.userAgent.toLowerCase()))
 
       };
 
+      //clicking a roll
       $('#rolls_decks').on('click','.roller li',function(){
           var thisRoll=$(this);
           var ul=thisRoll.closest('ul');
           var itemText=$('span',thisRoll.closest('.roller')).text();
           var reason=itemText;
-          var roll='1d20'+ul.attr('d20');
+          var d20Bonus=ul.attr('d20');
+          if(!isNaN(d20Bonus)&& d20Bonus>=0 && !d20Bonus.startsWith('+'))
+          {
+            d20Bonus='+'+d20Bonus;
+          }
+          var roll='1d20'+d20Bonus;
           if(ul.hasClass('check')){
               reason+=' check';
           }else if(ul.hasClass('save')){
@@ -164,7 +171,7 @@ if(/chrome/.test(navigator.userAgent.toLowerCase()))
           var dmg=ul.attr('dmg');
           if(dmg)
           {
-                addRollToList(reason,roll,function(){addRollToList(itemText+' damage',dmg,null)});
+                addRollToList(itemText+' damage',dmg,null);
           }
           else
           {
