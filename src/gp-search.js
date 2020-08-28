@@ -6,7 +6,8 @@ var getPostBlocks=function(basePage,pageNum,searchFor,ret,onComplete)
         var pageData=$(data);
         $('.postBlock',pageData).each(function(){
             var block=$(this);
-            if($('.post',block).html().toLowerCase().indexOf(searchFor)!=-1)
+            if(($('.post',block).html().toLowerCase().indexOf(searchFor)!=-1) ||
+               ($('.posterDetails',block).html().toLowerCase().indexOf(searchFor)!=-1))
             {
                 ret.push(block.clone());
             }
