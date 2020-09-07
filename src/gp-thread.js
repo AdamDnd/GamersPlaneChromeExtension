@@ -1,5 +1,6 @@
 var checkOnline=function(pageNum){
-    $.post( "https://api.gamersplane.com/users/gamersList/",{page:pageNum}, function( data ) {
+    gpAjaxPost( "https://api.gamersplane.com/users/gamersList/",{page:pageNum}, function( txtdata ) {
+        var data=JSON.parse(txtdata);
         for(var i=0;i<data.users.length;i++)
         {
             var user=data.users[i];
@@ -14,7 +15,7 @@ var checkOnline=function(pageNum){
         }
 
         checkOnline(pageNum+1);
-      }, "json");    
+      });    
 };
 
 checkOnline(1);
