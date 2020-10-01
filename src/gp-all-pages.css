@@ -209,3 +209,8 @@ body.dark input[type=file].imageFileUpload
     color:transparent;
     border-color: transparent;
 }
+
+body.dark #primaryTraits .trait
+{
+    background-color:#37393F;
+}
