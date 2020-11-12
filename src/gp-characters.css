@@ -9,17 +9,17 @@ body #content .bodyContainer
     padding-top:0;
 }
 
-.feat 
+#page_characterSheet .feat 
 {
     position: relative;
 }
 
-.feat_name
+#page_characterSheet .feat_name
 {
     margin-left:1.5em;
 }
 
-.feat_notesLink
+#page_characterSheet .feat_notesLink
 {
     position: absolute;
     top:4px;
@@ -27,13 +27,13 @@ body #content .bodyContainer
     font-size: 0;
 }
 
-.feat_notesLink:before
+#page_characterSheet .feat_notesLink:before
 {
     content: '\25B2';
     font-size: 1rem;
 }
 
-.feat_notesLink.open:before
+#page_characterSheet .feat_notesLink.open:before
 {
     content: '\25BC';
 }
