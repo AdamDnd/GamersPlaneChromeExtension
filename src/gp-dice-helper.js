@@ -15,6 +15,7 @@ if (gameDetails.length > 0) {
                 isGm = gameDataJson.details.gm.userID == curUserId;
                 addDiceWizards();
             }
+            (!gameDataJson.details.description)||(applyPageStyle(gameDataJson.details.description));
         });
     });
 

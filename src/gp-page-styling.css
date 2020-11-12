@@ -1,0 +1,40 @@
+body.style-background #content{
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;    
+}
+
+body.style-background #content
+{
+    background-color: transparent;
+}
+
+body.style-background #content .bodyContainer:before
+{
+    position: absolute;
+    top:0;
+    bottom:0;
+    left:-10px;
+    right:-10px;
+    content: ' ';
+    display: block;
+    background-color: rgba(255,255,255,.8);
+    z-index: 0;
+}
+
+body.style-background.dark #content .bodyContainer:before
+{
+    background-color: rgba(0,0,0,.8);
+}
+
+body.style-background #content>.bodyContainer>div
+{
+    position: relative;
+}
+
+
+body.style-background #content
+{
+    padding-top: 120px;
+}

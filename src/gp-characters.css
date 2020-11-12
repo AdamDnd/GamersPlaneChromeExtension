@@ -1,0 +1,56 @@
+
+h1.headerbar
+{
+    display: none;
+}
+
+body #content .bodyContainer
+{
+    padding-top:0;
+}
+
+.feat 
+{
+    position: relative;
+}
+
+.feat_name
+{
+    margin-left:1.5em;
+}
+
+.feat_notesLink
+{
+    position: absolute;
+    top:4px;
+    left:0;
+    font-size: 0;
+}
+
+.feat_notesLink:before
+{
+    content: '\25B2';
+    font-size: 1rem;
+}
+
+.feat_notesLink.open:before
+{
+    content: '\25BC';
+}
+
+.avatarPreview
+{
+    position: absolute;
+    top:10px;
+    height:100px;
+    width: 100px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 5px;
+}
+
+body #content
+{
+    padding-top: 120px;
+}
