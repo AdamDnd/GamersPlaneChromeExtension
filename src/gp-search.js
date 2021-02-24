@@ -1,6 +1,8 @@
 var searchButton = $('<a id="postSearch">Search</a>').prependTo($('#threadMenu .rightCol'));
 $('<span"> | </span>').prependTo($('#threadMenu .rightCol'));
 var singlePageButton = $('<a id="postSinglePage">One page</a>').prependTo($('#threadMenu .rightCol'));
+$('<span"> | </span>').prependTo($('#threadMenu .rightCol'));
+var backfillButton = $('<a id="backfillPage">Backfill</a>').prependTo($('#threadMenu .rightCol'));
 
 var getPostBlocks = function (basePage, pageNum, onLoadingPage, onLoadedPosts, onComplete) {
     onLoadingPage(pageNum);
@@ -91,4 +93,37 @@ singlePageButton.on('click', function () {
         function () {
             singlePageButton.text('One page');
         });
+});
+
+backfillButton.on('click',function(){
+    $('.postBlockFound').remove();
+
+    var basePage = window.location.href.split('?')[0];
+    var prevPages=$('.paginateDiv a.page').prevAll('a').filter(function( index ) {return !isNaN($(this).text());});
+    var topOfPage=$('#threadMenu');
+
+
+    var loadPageNumbers=function(prevPages,i)
+    {
+        if(i<prevPages.length)
+        {
+            var startScroll = $(window).scrollTop();
+            var startHeight=$(document ).height()
+
+            $.get(basePage + '?page=' + $(prevPages[i]).text(), function (data) {
+                var block=$('.postBlock', $(data));
+                var addedBlock = (block.clone().insertAfter(topOfPage)).addClass('postBlockFound');
+                $('.spoiler>.tag', addedBlock).on('click', function () { $(this).closest('.spoiler').toggleClass('closed'); });
+
+                var newHeight=$(document).height()
+                $(window).scrollTop(startScroll+(newHeight-startHeight));
+            
+                loadPageNumbers(prevPages,i+1);
+            });
+        
+        }
+    };
+    
+    loadPageNumbers(prevPages,0);
+
 });

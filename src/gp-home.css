@@ -7,3 +7,20 @@
 {
     display:none;
 }
+
+
+#page_home .latestGamePosts .post .title
+{
+    margin-top: .3em;
+}
+
+#page_home .latestGamePosts .post .title img
+{
+    margin-right: .5rem;
+}
+
+#page_home #latestGamePostLink
+{
+    margin-top: .5em;
+    text-align: right;
+}
