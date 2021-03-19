@@ -1,6 +1,6 @@
-$('#partners .skewedDiv').text('Game forums');
+$('#latestGamePosts .skewedDiv').text('Game forums');
 
-var widgetBody = $('#partners .widgetBody').html('');
+var widgetBody = $('#latestGamePosts .widgetBody').html('');
 var latestGames = $('<div class="latestGamePosts"></div>').appendTo($('#latestPosts .widgetBody'));
 if($('.sideWidget .loggedIn .games .gameInfo').length>0){
   $('<h3 class="headerbar" style="transform: skew(-30deg); margin-left: 9px; margin-right: 9px;"><div class="skewedDiv" style="transform: skew(30deg); margin-left: 9px; margin-right: 9px;">Your Games</div></h3>').appendTo($('#latestGames'));
@@ -37,7 +37,7 @@ $.get("https://gamersplane.com/forums/", function (data) {
   }).appendTo(widgetBody);
 
 
-  $('#partners').attr('id', 'partners_old');
+  $('#latestGamePosts').attr('id', 'partners_old');
 });
 
 $.get("https://gamersplane.com/forums/search/?search=latestGamePosts", function (data) {

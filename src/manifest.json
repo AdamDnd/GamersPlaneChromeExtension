@@ -1,6 +1,6 @@
 {
     "name": "Gamers' Plane",
-    "version": "0.9.9.3",
+    "version": "0.9.9.5",
     "icons": {
         "16": "icon_16.png",
         "32": "icon_32.png",
@@ -49,7 +49,7 @@
         },
         {
           "matches": ["https://gamersplane.com/forums/*"],
-          "css": ["gp-post.css","gp-page-styling.css"],
+          "css": ["gp-post.css","gp-page-styling.css","gp-forum.css"],
           "js": ["jquery-3.5.1.min.js","setting-storage.js","gp-page-styling.js","gp-forum.js"],
           "run_at": "document_idle"
         },
@@ -58,7 +58,14 @@
           "css": ["gp-page-styling.css","gp-characters.css"],
           "js": ["jquery-3.5.1.min.js","gp-page-styling.js","gp-characters.js"],
           "run_at": "document_idle"          
+        },
+        {
+          "matches": ["https://gamersplane.com/characters/dnd5/*/edit/"],
+          "css": ["gp-edit-dnd5e.css"],
+          "js": ["gp-edit-dnd5e.js"],
+          "run_at": "document_idle"          
         }
+
       ],
       "options_ui": {
         "page": "options.html",
