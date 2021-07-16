@@ -12,11 +12,13 @@ $.get("https://gamersplane.com/forums/", function (data) {
   var games = $('.tableDiv:has(.pubGameToggle) .forumList .tr', forumPage);
   games.each(function () {
     var tr = $(this);
-    var post = $('<div class="post"></div>').appendTo(widgetBody);
-    var icon = $($('.icon', tr).html()).appendTo(post);
-    var title = $('<div class="title"></div>').html($('.name', tr).html()).appendTo(post);
-    $('.description', title).remove();
-    var title = $('<div class="byLine"></div>').html('by ' + $('.lastPost', tr).html().replace(/<br ?\/?>/g, ", ")).appendTo(post);
+    if(!($.trim($('.name', tr).text()).toLowerCase().startsWith('zzz'))){
+      var post = $('<div class="post"></div>').appendTo(widgetBody);
+      var icon = $($('.icon', tr).html()).appendTo(post);
+      var title = $('<div class="title"></div>').html($('.name', tr).html()).appendTo(post);
+      $('.description', title).remove();
+      var title = $('<div class="byLine"></div>').html('by ' + $('.lastPost', tr).html().replace(/<br ?\/?>/g, ", ")).appendTo(post);
+    }
   });
 
   $('.post', widgetBody).sort(function (a, b) {
