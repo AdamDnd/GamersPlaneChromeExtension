@@ -214,3 +214,11 @@ body.dark #primaryTraits .trait
 {
     background-color:#37393F;
 }
+
+body.dark .forumIcon{
+    visibility: hidden;
+}
+
+body.dark .forumIcon.newPosts{
+    visibility: visible;
+}
