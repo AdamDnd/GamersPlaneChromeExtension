@@ -15,7 +15,7 @@ var checkOnline=function(pageNum){
         }
 
         checkOnline(pageNum+1);
-      });    
+      });
 };
 
 checkOnline(1);
