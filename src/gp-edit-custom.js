@@ -26,12 +26,12 @@ var replaceHandlebars = function(text,obj){
     });
 
 
-    text = text.replace(/({{)([\w\.]+)(}})/g, function(match, p1,p2,p3){
+    text = text.replace(/({{)([\w\.\[\]]+)(}})/g, function(match, p1,p2,p3){
         var retObj=byJsonPath(obj,p2);
         if (typeof retObj == "boolean") {
             return retObj?"1":"0";
         }
-        return retObj?retObj.toString():"";
+        return (retObj!=null)?retObj.toString():"";
     });
 
     return text;
@@ -44,8 +44,11 @@ var pasteDndBCharacter=function(character){
 
     charSheet=replaceHandlebars(charSheet,character);
 
-    $('textarea.markItUpEditor').val(charSheet);
+    $('textarea.markItUpEditor').focus().val(charSheet);
 
+    var customEvent = document.createEvent('Event');
+    customEvent.initEvent('change', true, true);
+    $('textarea.markItUpEditor')[0].dispatchEvent(customEvent);
 };
 
 
