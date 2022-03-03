@@ -25,14 +25,16 @@ var gamersPlaneIntegration=(function (){
                 saveProficiencies.push(false);
             }
         });
-        
+
         var skills=[];
         $('.ct-skills__item').each(function(){
             var pThis=$(this);
             var skill={
                 name:$('.ct-skills__col--skill',pThis).text(),
                 proficient:($('.ddbc-tooltip[data-original-title="Proficiency"]',pThis).length?true:false),
-                modifier:$('.ct-skills__col--modifier',pThis).text()
+                modifier:$('.ct-skills__col--modifier',pThis).text(),
+                stat:$('.ct-skills__col--stat',pThis).text().toLowerCase(),
+                profLevels:($('.ddbc-tooltip[data-original-title="Proficiency"]',pThis).length?1:0)+($('.ddbc-tooltip[data-original-title="Expertise"]',pThis).length?2:0)
             };
             skills.push(skill);
         });
@@ -48,6 +50,7 @@ var gamersPlaneIntegration=(function (){
         var race=$('.ddbc-character-summary__race').text();
         var classes=$('.ddbc-character-summary__classes').text();
         var backgroundImage=$('body').css('backgroundImage').split('"')[1];
+        var totalLevel=$.trim($('.ddbc-character-progression-summary__level').text().replace('Level',""));
 
         var features=[];
 
@@ -72,7 +75,7 @@ var gamersPlaneIntegration=(function (){
             });
 
         });
-        
+
 
         getFeatures(features);
 
@@ -94,29 +97,54 @@ var gamersPlaneIntegration=(function (){
             if($('.ddbc-concentration-icon',pThis).length>0){ icons+=' (C)';}
             if($('.ddbc-ritual-icon',pThis).length>0){ icons+=' (R)';}
             var spellClass=$('.ct-spells-spell__meta',pThis).text();
-            
+
             var details='';
+            var bbdetails='';
             var spellDet=$('.ct-spell-detail');
             $('.ddbc-property-list__property',spellDet).each(function(){
                 details+=$('.ddbc-property-list__property-label',this).text();
                 details+=' ';
                 details+=$('.ddbc-property-list__property-content',this).text();
                 details+='\n';
+
+                bbdetails+='[b]'+$('.ddbc-property-list__property-label',this).text()+':[/b] ';
+                bbdetails+=$('.ddbc-property-list__property-content',this).text();
+                bbdetails+='\n';
             });
 
             $('.ct-spell-detail__description p',spellDet).each(function(){
                 details+=$(this).text();
                 details+='\n';
+                bbdetails+=$(this).text();
+                bbdetails+='\n';
             });
             details+='\n';
-            details+=('https://www.dndbeyond.com/spells/'+encodeURIComponent(spellName));     
+            details+=('https://www.dndbeyond.com/spells/'+encodeURIComponent(spellName));
+
+            bbdetails+='\n';
+            bbdetails+='[url]'+('https://www.dndbeyond.com/spells/'+encodeURIComponent(spellName))+'[/url]';
 
             spells.push({
                 name:(spellLevel+': '+spellName+icons),
                 text:details,
+                bbtext:bbdetails,
                 spellClass:spellClass
             });
         });
+
+        var spellSplots=[];
+        $('.ct-content-group__header:has(.ct-spells-level-casting__slot-group-manager)').each(function(){
+            var pThis=$(this);
+            var name=$('.ct-content-group__header-content',pThis).text();
+            var slots=$('.ct-slot-manager__slot',pThis).length;
+            var remaining=slots-$('.ct-slot-manager__slot--used',pThis).length;
+            spellSplots.push({
+                name:name,
+                slots:slots,
+                remaining:remaining
+            });
+        });
+
 
         //inventory
         $('.ct-primary-box__tab--equipment').click();
@@ -124,10 +152,21 @@ var gamersPlaneIntegration=(function (){
         var inventory=[];
         $('.ct-inventory-item').each(function(){
             var pThis=$(this);
-            inventory.push({
-                name:$('.ddbc-item-name',pThis).text(),
-                quantity:$('.ct-inventory-item__quantity',pThis).text()
-            });
+            var invName=$('.ddbc-item-name',pThis).text();
+            var invQuantity=$('.ct-inventory-item__quantity',pThis).text();
+            var bbQuantity="";
+            if(invQuantity=="--"){
+                invQuantity="";
+            } else if(invQuantity>1){
+                bbQuantity=" ([_="+invQuantity+"])";
+            }
+            if(invName){
+                inventory.push({
+                    name:invName,
+                    quantity:invQuantity,
+                    bbQuantity:bbQuantity
+                });
+            }
 
         });
 
@@ -147,7 +186,17 @@ var gamersPlaneIntegration=(function (){
                 text:$('.ct-trait-content__content',pThis).text()
             });
         });
-        
+
+        var proficiencyGroups=[];
+        $('.ct-proficiency-groups__group').each(function(){
+            var pThis=$(this);
+            proficiencyGroups.push({
+                name:$('.ct-proficiency-groups__group-label',pThis).text(),
+                text:$('.ct-proficiency-groups__group-items',pThis).text()
+            });
+        });
+
+
         var character={
             name:characterName,
             race:race,
@@ -162,6 +211,7 @@ var gamersPlaneIntegration=(function (){
             hpCur:hpCur,
             hpMax:hpMax,
             hpTemp:hpTemp,
+            totalLevel:totalLevel,
             skills:skills,
             inspiration:inspiration,
             features:features,
@@ -169,14 +219,18 @@ var gamersPlaneIntegration=(function (){
             inventory:inventory,
             attacks:attacks,
             descriptionTraits:descriptionTraits,
-            backgroundImage:backgroundImage
+            backgroundImage:backgroundImage,
+            proficiencyGroups:proficiencyGroups,
+            spellSplots:spellSplots
         };
+
+        console.log(character);
 
         //save character
         chrome.storage.local.set({
             dndbcharacter: character
           }, function() {});
-    
+
           $("<div style='position: fixed;top: 0;bottom: 0;left: 0;right: 0;background-color: rgba(255,255,255,0.9);z-index: 60000;text-align: center;padding-top: 300px;font-size: 300%;font-weight: bold;'>Copied "+characterName+"<br/><small style='font-size:50%;'>Paste into your Gamers' Plane character sheet</small></div>")
           .appendTo('body')
           .fadeTo(3000,1.0, function(){
@@ -186,7 +240,7 @@ var gamersPlaneIntegration=(function (){
             });
 
     };
-    
+
     //Add button to menu
     function addGp(){
         var heading=$('.mm-navbar__menu-list');
