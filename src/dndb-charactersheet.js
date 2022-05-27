@@ -82,7 +82,7 @@ var gamersPlaneIntegration=(function (){
         var spells=[];
         //spells
         $('.ct-primary-box__tab--spells').click();
-        $('.ct-spells-spell').each(function(){
+        $('.ct-spells-spell:not(:has(.ct-spells-spell__scaled))').each(function(){
             var pThis=$(this);
             pThis.click();
             var spellLevel=$('.ct-content-group__header-content',pThis.closest('.ct-content-group')).text();
@@ -107,7 +107,7 @@ var gamersPlaneIntegration=(function (){
                 details+=$('.ddbc-property-list__property-content',this).text();
                 details+='\n';
 
-                bbdetails+='[b]'+$('.ddbc-property-list__property-label',this).text()+':[/b] ';
+                bbdetails+='[b]'+$('.ddbc-property-list__property-label',this).text()+'[/b] ';
                 bbdetails+=$('.ddbc-property-list__property-content',this).text();
                 bbdetails+='\n';
             });

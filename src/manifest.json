@@ -1,6 +1,6 @@
 {
     "name": "Gamers' Plane",
-    "version": "1.0.0.2",
+    "version": "1.0.0.3",
     "icons": {
         "16": "icon_16.png",
         "32": "icon_32.png",
@@ -30,7 +30,7 @@
           "run_at": "document_idle"
         },
         {
-          "matches": ["https://www.dndbeyond.com/profile/*/characters/*"],
+          "matches": ["https://www.dndbeyond.com/profile/*/characters/*","https://www.dndbeyond.com/characters/*/*","https://www.dndbeyond.com/characters/*"],
           "css": ["dndb-charactersheet.css"],
           "js": ["jquery-3.5.1.min.js","setting-storage.js","dndb-charactersheet.js"],
           "run_at": "document_idle"
